@@ -14,23 +14,29 @@ hexo.extend.helper.register('min2read', function (content, { cn = 300, en = 160 
   return readingTime < 1 ? '1' : parseInt(readingTime, 10);
 });
 
-hexo.extend.helper.register('wordcount', function (content) {
+hexo.extend.helper.register('wordcount', function (content, type) {
   var len = counter(content);
   var count = len[0] + len[1];
-  if (count < 1000) {
-    return count;
+  if (type == 'k') {
+    return Math.round(count / 100) / 10 + 'k';
   }
-  return Math.round(count / 100) / 10 + 'k';
+  if (type == ',') {
+    return parseFloat(count).toLocaleString()
+  }
+  return count;
 });
 
-hexo.extend.helper.register('totalcount', function (site) {
+hexo.extend.helper.register('totalcount', function (site, type) {
   var count = 0;
   site.posts.forEach(function (post) {
     var len = counter(post.content);
     count += len[0] + len[1];
   });
-  if (count < 1000) {
-    return count;
+  if (type == 'k') {
+    return Math.round(count / 100) / 10 + 'k';
   }
-  return Math.round(count / 100) / 10 + 'k';
+  if (type == ',') {
+    return parseFloat(count).toLocaleString()
+  }
+  return count;
 });
