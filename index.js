@@ -40,3 +40,17 @@ hexo.extend.helper.register('totalcount', function (site, type) {
   }
   return count;
 });
+
+hexo.extend.helper.register('totalread', function (site, type, { cn = 300, en = 160 } = {}) {
+  var count = [0, 0];
+  site.posts.forEach(function (post) {
+    var len = counter(post.content);
+    count[0] += len[0];
+    count[1] += len[1];
+  });
+  var readingTime = count[0] / cn + count[1] / en;
+  if (type == 'h') {
+    return Math.round((readingTime < 1 ? '1' : parseInt(readingTime, 10)) / 60);
+  }
+  return readingTime < 1 ? '1' : parseInt(readingTime, 10);
+});

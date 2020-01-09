@@ -19,7 +19,7 @@ wordcount(post.content)
 ### 阅读时长预计 Min2Read
 
 ```js
-min2read(post.content)
+min2read(post.content)  // 单位：分钟
 ```
 
 设置阅读速度 Set Reading Speed:
@@ -36,6 +36,20 @@ totalcount(site, 'k')   // 12.3k
 totalcount(site, ',')   // 12,345
 ```
 
+### 总阅读时长预计 TotalRead
+
+```js
+totalread(site)         // 单位：分钟
+totalread(site, 'h')    // 单位：小时
+```
+
+设置阅读速度 Set Reading Speed:
+
+```js
+totalread(site, '', {cn: 300, en: 160})   // 单位：分钟
+totalread(site, 'h', {cn: 300, en: 160})   // 单位：小时
+```
+
 ## Demo
 
 ### Swig
@@ -43,19 +57,19 @@ totalcount(site, ',')   // 12,345
 Post Count:
 
 ```swig
-   <span class="post-count">{{ wordcount(post.content) }}</span>
+<span class="post-count">{{ wordcount(post.content) }}</span>
 ```
 
 Post Minutes to Read:
 
 ```swig
-   <span class="post-count">{{ min2read(post.content) }}</span>
+<span class="post-count">{{ min2read(post.content) }}</span>
 ```
 
 Total Count:
 
 ```swig
-   <span class="post-count">{{ totalcount(site) }}</span>
+<span class="post-count">{{ totalcount(site) }}</span>
 ```
 
 ### Ejs
@@ -63,19 +77,19 @@ Total Count:
 Post Count:
 
 ```ejs
-   <span class="post-count"><%= wordcount(post.content) %></span>
+<span class="post-count"><%= wordcount(post.content) %></span>
 ```
 
 Post Minutes to Read:
 
 ```ejs
-   <span class="post-count"><%= min2read(post.content) %></span>
+<span class="post-count"><%= min2read(post.content) %></span>
 ```
 
 Total Count:
 
 ```ejs
-   <span class="post-count"><%= totalcount(site) %></span>
+<span class="post-count"><%= totalcount(site) %></span>
 ```
 
 ### Jade
@@ -83,19 +97,19 @@ Total Count:
 Post Count:
 
 ```jade
-   span.post-count= wordcount(post.content)
+span.post-count= wordcount(post.content)
 ```
 
 Post Minutes to Read:
 
 ```jade
-    span.post-count= min2read(post.content)
+span.post-count= min2read(post.content)
 ```
 
 Total Count:
 
 ```swig
-   span.post-count= totalcount(site)
+span.post-count= totalcount(site)
 ```
 
 ## LICENSE
